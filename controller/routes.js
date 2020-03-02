@@ -5,7 +5,7 @@ exports.findtag = async (req, res) => {
   try {
     const resp = await axios.get(req.query.url, {
       headers: {
-        "User-Agent": "*",
+        "User-Agent": "Mozilla/5.0",
         "Content-Type": "text/html",
         Accept: "*/*"
       }
