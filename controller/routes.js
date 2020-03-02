@@ -3,7 +3,13 @@ const dns = require("dns");
 
 exports.findtag = async (req, res) => {
   try {
-    const resp = await axios.get(req.query.url);
+    const resp = await axios.get(req.query.url, {
+      headers: {
+        "User-Agent": "PostmanRuntime/7.22.0",
+        "Content-Type": "text/html",
+        Accept: "*/*"
+      }
+    });
     let regex = `<meta.*?${req.query.attr || "name"}=\\"${
       req.query.tag
     }\\".*?content=\\"(.*?)\\".*?>`;
