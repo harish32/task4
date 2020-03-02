@@ -5,7 +5,7 @@ exports.findtag = async (req, res) => {
   try {
     const resp = await axios.get(req.query.url, {
       headers: {
-        "User-Agent": "PostmanRuntime/7.22.0",
+        "User-Agent": "*",
         "Content-Type": "text/html",
         Accept: "*/*"
       }
