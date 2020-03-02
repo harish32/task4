@@ -11,8 +11,7 @@ exports.findtag = async (req, res) => {
     if (!data) {
       return res.status(400).json({
         success: false,
-        data: "tag not found",
-        res: resp.data
+        data: "tag not found"
       });
     }
     res.status(200).json({ success: true, data: data[1] });
