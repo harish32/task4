@@ -1,4 +1,5 @@
 const axios = require("axios");
+const dns = require("dns");
 
 exports.findtag = async (req, res) => {
   try {
@@ -20,28 +21,22 @@ exports.findtag = async (req, res) => {
   }
 };
 
-exports.finddns = async (req, res) => {
-  try {
-    const str = ["http://", "https://", "www."];
-    let url = req.query.url;
-    str.forEach(ele => {
-      url = url.replace(ele, "");
-    });
-    const data = await axios.get(
-      `https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_cf19tw1AtNVCuljqvTRUQwCsmZzNr&domainName=${url}&type=TXT&outputFormat=JSON`
-    );
-    if (data.data.ErrorMessage) {
+exports.finddns = (req, res) => {
+  const str = ["http://", "https://", "www."];
+  let url = req.query.url;
+  str.forEach(ele => {
+    url = url.replace(ele, "");
+  });
+  dns.resolveTxt(url, (err, data) => {
+    if (!data) {
       return res
         .status(400)
-        .json({ success: false, err: data.data.ErrorMessage.msg });
+        .json({ success: false, err: "something went wrong" });
     }
-    const records = data.data.DNSData.dnsRecords;
-    const found = records.find(ele => ele.strings.includes(req.query.dnstext));
+    const found = data.find(ele => ele.includes(req.query.dnstext));
     if (!found) {
       return res.status(400).json({ success: false, err: "record not found" });
     }
     res.status(200).json({ success: true, data: found });
-  } catch (err) {
-    res.status(500).json({ success: false, err: err.message });
-  }
+  });
 };

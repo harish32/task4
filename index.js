@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const router = require("./routes/routes");
+const dns = require("dns");
 
 app.use("/", router);
 
