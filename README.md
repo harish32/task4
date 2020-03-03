@@ -14,7 +14,8 @@ node index.js
 app provides two end points :
 
 - /meta
-  http://localhost:5000/meta?url=yoururl&tag=tagname
+
+http://localhost:5000/meta?url=yoururl&tag=tagname
 
 url = any url,
 
