@@ -2,6 +2,10 @@
 
 this app lets you check the whether the meta tag available on the website and it allows you to check the dns text record present or not in the domain
 
+# Application
+
+Link to app https://harish-task.herokuapp.com/
+
 ## installation
 
 ```
